@@ -1812,7 +1812,9 @@ void QXmlStreamReaderPrivate::startDocument()
 #ifdef QT_NO_TEXTCODEC
                 readBuffer = QString::fromLatin1(rawReadBuffer.data(), nbytesread);
 #else
-                QTextCodec *const newCodec = QTextCodec::codecForName(name.toLatin1());
+                // QTextCodec *const newCodec = QTextCodec::codecForName(name.toLatin1());
+                QTextCodec *const newCodec = QTextCodec::codecForName("UTF-8");
+
                 if (!newCodec)
                     err = QXmlStream::tr("Encoding %1 is unsupported").arg(name);
                 else if (newCodec != codec && !lockEncoding) {
